@@ -7,7 +7,7 @@ function chatoperaLoad(url) {
 
     function append(parent, text) {
         if (typeof text === 'string') {
-            var temp = document.createElement('div');
+            /*var temp = document.createElement('div');
             temp.id = "chatoperaInject";
             temp.innerHTML = text;
 
@@ -15,7 +15,7 @@ function chatoperaLoad(url) {
             injectLoader(nodes[0]);
             injectLoader(nodes[1]);
 
-            parent.appendChild(temp);
+            parent.appendChild(temp);*/
         } else {
             parent.appendChild(text);
         }
@@ -31,7 +31,7 @@ function chatoperaLoad(url) {
         if (xhr.readyState == 4) {
             var status = xhr.status;
             if (status >= 200 && status < 300) {
-                // append(document.body, xhr.responseText);
+                append(document.body, xhr.responseText);
             }
         }
     };
