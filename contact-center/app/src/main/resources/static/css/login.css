@@ -87,7 +87,7 @@ html { *overflow:auto; font-family:"Microsoft Yahei","Helvetica","Simsun","Arial
     font-weight: 600;
     margin: 0 0 -1px;
     line-height: 38px;
-    border-bottom: solid 3px #008df3;
+    border-bottom: solid 3px #32c24d;
     display: inline-block;
 	margin-bottom:20px;
 }
@@ -584,7 +584,7 @@ body .form-group label[class*=" icon-"]+input, body .form-group label[class*=" i
 }
 
 .btn-primary {
-    background-color: #008df3;
+    background-color: #32c24d;
     border-color: #006fc0;
 }
 
