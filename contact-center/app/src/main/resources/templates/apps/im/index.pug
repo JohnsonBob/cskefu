@@ -64,7 +64,6 @@ html
                         br: []
                     },
                     afterChange: function () {
-
                         var message = document.getElementById('message').value;
                         var imgReg = /<img.*?(?:>|\/>)/gi;
                         var imgnumber = 0;
@@ -119,22 +118,15 @@ html
                                 sendMessage();
                             });
                         } else {
-                            var kindEditorIframe = $("iframe").contents().find("body");
-                            kindEditorIframe.keydown(function (event) {
-                                if (event.keyCode == 13 && !event.ctrlKey) {
-                                    self.sync();
-                                    sendMessage();
-                                    return false;
-                                } else if (event.keyCode == 13 && event.ctrlKey) {
-                                    editor.insertHtml('<br/>');
-                                }
-                            });
-                            //Ctrl+Enter提交表单
+                            // Ctrl+Enter 提交表单
                             K.ctrl(document, 13, function () {
-                                editor.insertHtml('<br/>');
+                                self.sync();
+                                sendMessage();
                             });
+                            // Ctrl+Enter 提交表单
                             K.ctrl(self.edit.doc, 13, function () {
-                                editor.insertHtml('<br/>');
+                                self.sync();
+                                sendMessage();
                             });
                         }
                     }
@@ -386,6 +378,10 @@ html
 
                         .clearfix.message.welcome
                             span#welcome-message= inviteData.dialog_message ? inviteData.dialog_message : '欢迎您来咨询！欢迎使用嗏嗏客服！如需帮助请联系 info@chatopera.com'
+
+                        if sessionConfig && sessionConfig.sessionmsg
+                            div(style='text-align:center;')
+                                span.clearfix.message.session-message=sessionConfig.sessionmsg
 
                         if chatMessageList && chatMessageList.content
                             for chatMessage in pugHelper.reverse(chatMessageList.content)

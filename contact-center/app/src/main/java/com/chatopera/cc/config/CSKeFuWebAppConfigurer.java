@@ -16,25 +16,35 @@
  */
 package com.chatopera.cc.config;
 
-import com.chatopera.cc.interceptor.CrossInterceptorHandler;
-import com.chatopera.cc.interceptor.LogIntercreptorHandler;
-import com.chatopera.cc.interceptor.UserInterceptorHandler;
+import com.chatopera.cc.interceptor.*;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 public class CSKeFuWebAppConfigurer
         extends WebMvcConfigurerAdapter {
+
+
+    /**
+     * https://www.baeldung.com/spring-cors
+     * @param registry
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        // enables CORS requests from any origin to any endpoint in the application.
+        registry.addMapping("/**").allowedOrigins("*");
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 多个拦截器组成一个拦截器链
         // addPathPatterns 用于添加拦截规则
         // excludePathPatterns 用户排除拦截
-        registry.addInterceptor(new UserInterceptorHandler()).addPathPatterns("/**").excludePathPatterns("/login.html","/im/**","/res/image*","/res/file*","/cs/**","/messenger/webhook/*");
+        registry.addInterceptor(new UserExperiencePlanInterceptorHandler()).addPathPatterns("/**").excludePathPatterns("/im/**", "/res/image*", "/res/file*", "/cs/**", "/messenger/webhook/*");
+        registry.addInterceptor(new UserInterceptorHandler()).addPathPatterns("/**").excludePathPatterns("/login.html", "/im/**", "/res/image*", "/res/file*", "/cs/**", "/messenger/webhook/*");
         registry.addInterceptor(new CrossInterceptorHandler()).addPathPatterns("/**");
         registry.addInterceptor(new LogIntercreptorHandler()).addPathPatterns("/**");
+        registry.addInterceptor(new ViewsInterceptorHandler()).addPathPatterns("/**");
         super.addInterceptors(registry);
     }
 }
