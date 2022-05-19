@@ -31,7 +31,7 @@ function chatoperaLoad(url) {
         if (xhr.readyState == 4) {
             var status = xhr.status;
             if (status >= 200 && status < 300) {
-                // append(document.body, xhr.responseText);
+                append(document.body, xhr.responseText);
             }
         }
     };
